@@ -6,20 +6,33 @@ import { getAll, get5First, getRed } from './api/goods';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const loadAll = async () => {
-    await fetch('/api/goods');
-    setGoods(await getAll());
+    try {
+      setError(null);
+      setGoods(await getAll());
+    } catch {
+      setError('Failed to load goods');
+    }
   };
 
   const loadFirstFive = async () => {
-    await fetch('/api/goods');
-    setGoods(await get5First());
+    try {
+      setError(null);
+      setGoods(await get5First());
+    } catch {
+      setError('Failed to load goods');
+    }
   };
 
   const loadRed = async () => {
-    await fetch('/api/goods');
-    setGoods(await getRed());
+    try {
+      setError(null);
+      setGoods(await getRed());
+    } catch {
+      setError('Failed to load goods');
+    }
   };
 
   return (
@@ -37,6 +50,8 @@ export const App: React.FC = () => {
       <button type="button" data-cy="red-button" onClick={loadRed}>
         Load red goods
       </button>
+
+      {error && <p>{error}</p>}
 
       <GoodsList goods={goods} />
     </div>
