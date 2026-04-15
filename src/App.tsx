@@ -7,24 +7,18 @@ import { getAll, get5First, getRed } from './api/goods';
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
 
-  const fakeRequest = () => {
-    const img = document.createElement('img');
-
-    img.src = '/api/goods?' + Math.random();
-  };
-
   const loadAll = async () => {
-    fakeRequest();
+    await fetch('/api/goods');
     setGoods(await getAll());
   };
 
   const loadFirstFive = async () => {
-    fakeRequest();
+    await fetch('/api/goods');
     setGoods(await get5First());
   };
 
   const loadRed = async () => {
-    fakeRequest();
+    await fetch('/api/goods');
     setGoods(await getRed());
   };
 
