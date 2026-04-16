@@ -2,7 +2,9 @@ import { Good } from '../types/Good';
 
 export const getAll = async (): Promise<Good[]> => {
   try {
-    const response = await fetch('./goods.json');
+    const response = await fetch(
+      '/react_dynamic-list-of-goods/goods.json'
+    );
 
     if (!response.ok) {
       throw new Error('Failed to load goods');
@@ -13,7 +15,6 @@ export const getAll = async (): Promise<Good[]> => {
     throw error;
   }
 };
-
 export const get5First = async (): Promise<Good[]> => {
   const goods = await getAll();
 
